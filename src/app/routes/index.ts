@@ -23,15 +23,62 @@
 
 //--- fourth modul start---
 
-import { z } from 'zod';
+// import express from 'express';
+// import { userRoutes } from '../modules/user/user.route';
+// import { StudentRoutes } from '../modules/student/student.route';
+// import { AcadimicSemesterRoute } from '../modules/acadimicSemester/acadimicSemester.route';
 
-const userValidationSchema = z.object({
-  password: z
-    .string({
-      invalid_type_error: 'password must be a string',
-    })
-    .max(20, { message: 'password can not be more tham 20 characters' })
-    .optional(),
-});
+// import { Router } from 'express';
 
-export default userValidationSchema;
+// const router = Router();
+
+// const moduleRoutes = [
+//   {
+//     path: '/users',
+//     route: userRoutes,
+//   },
+//   {
+//     path: '/students',
+//     route: StudentRoutes,
+//   },
+//   {
+//     path: '/acadimic-semester',
+//     route: AcadimicSemesterRoute,
+//   },
+// ];
+
+// moduleRoutes.forEach((route) => router.use(route.path, route.route));
+
+// export default router;
+
+//---fourth modul end ---
+
+//--- five modul start ---
+
+import express from 'express';
+import { userRoutes } from '../modules/user/user.route';
+import { StudentRoutes } from '../modules/student/student.route';
+import { AcadimicSemesterRoute } from '../modules/acadimicSemester/acadimicSemester.route';
+
+import { Router } from 'express';
+
+const router = Router();
+
+const moduleRoutes = [
+  {
+    path: '/users',
+    route: userRoutes,
+  },
+  {
+    path: '/students',
+    route: StudentRoutes,
+  },
+  {
+    path: '/acadimic-semester',
+    route: AcadimicSemesterRoute,
+  },
+];
+
+moduleRoutes.forEach((route) => router.use(route.path, route.route));
+
+export default router;
