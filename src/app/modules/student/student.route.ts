@@ -61,6 +61,22 @@
 
 //--five modul start ---
 
+// import express from 'express';
+// import { StudentControllers } from './student.controller';
+
+// const router = express.Router();
+
+// router.get('/', StudentControllers.getAllStudents);
+// router.get('/:studentId', StudentControllers.getSingleStudent);
+// router.delete('/:studentId', StudentControllers.deleteSingleStudent);
+// router.patch('/:studentId', StudentControllers.updateSingleStudent);
+
+// export const StudentRoutes = router;
+
+//--five modul end---
+
+//--six modul end ---
+
 import express from 'express';
 import { StudentControllers } from './student.controller';
 
@@ -69,5 +85,6 @@ const router = express.Router();
 router.get('/', StudentControllers.getAllStudents);
 router.get('/:studentId', StudentControllers.getSingleStudent);
 router.delete('/:studentId', StudentControllers.deleteSingleStudent);
+router.patch('/:studentId', StudentControllers.updateSingleStudent);
 
 export const StudentRoutes = router;

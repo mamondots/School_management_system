@@ -331,6 +331,88 @@
 
 //--five modul start ---
 
+// import catchAsync from '../../utilites/catchAsync';
+// import { StudentServices } from './student.service';
+// import { NextFunction, Request, RequestHandler, Response } from 'express';
+
+// // const catchAsync = (fu: RequestHandler) => {
+// //   return (req: Request, res: Response, next: NextFunction) => {
+// //     Promise.resolve(fn(req, res, next)).catch((err) => next(err));
+// //   };
+// // };
+
+// const getAllStudents = catchAsync(async (req, res, next) => {
+//   const result = await StudentServices.getAllStudentsFromDB(req.query);
+//   res.status(200).json({
+//     success: true,
+//     message: 'Students are retrieved succesfully',
+//     data: result,
+//   });
+// });
+
+// const getSingleStudent = catchAsync(async (req, res, next) => {
+//   const { studentId } = req.params;
+
+//   const result = await StudentServices.getSingleStudentFromDB(studentId);
+
+//   res.status(200).json({
+//     success: true,
+//     message: 'Student is retrieved succesfully',
+//     data: result,
+//   });
+// });
+
+// const deleteSingleStudent = catchAsync(async (req, res, next) => {
+//   const { studentId } = req.params;
+
+//   const result = await StudentServices.deleteSingleStudentFromDB(studentId);
+
+//   res.status(200).json({
+//     success: true,
+//     message: 'Student is deleted succesfully',
+//     data: result,
+//   });
+// });
+
+// const updateSingleStudent = catchAsync(async (req, res, next) => {
+//   const { studentId } = req.params;
+//   const { student } = req.body;
+//   const result = await StudentServices.updateDinleStudentsFromDB(
+//     studentId,
+//     student,
+//   );
+
+//   res.status(200).json({
+//     success: true,
+//     message: 'Student is updated succesfully',
+//     data: result,
+//   });
+// });
+// export const StudentControllers = {
+//   getAllStudents,
+//   getSingleStudent,
+//   deleteSingleStudent,
+//   updateSingleStudent,
+// };
+
+// // function fn(
+// //   req: Request<
+// //     import('express-serve-static-core').ParamsDictionary,
+// //     any,
+// //     any,
+// //     import('qs').ParsedQs,
+// //     Record<string, any>
+// //   >,
+// //   res: Response<any, Record<string, any>>,
+// //   next: NextFunction,
+// // ): any {
+// //   throw new Error('Function not implemented.');
+// // }
+
+//--five modul end --
+
+//--six modul end --
+
 import catchAsync from '../../utilites/catchAsync';
 import { StudentServices } from './student.service';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
@@ -342,7 +424,7 @@ import { NextFunction, Request, RequestHandler, Response } from 'express';
 // };
 
 const getAllStudents = catchAsync(async (req, res, next) => {
-  const result = await StudentServices.getAllStudentsFromDB();
+  const result = await StudentServices.getAllStudentsFromDB(req.query);
   res.status(200).json({
     success: true,
     message: 'Students are retrieved succesfully',
@@ -374,21 +456,37 @@ const deleteSingleStudent = catchAsync(async (req, res, next) => {
   });
 });
 
+const updateSingleStudent = catchAsync(async (req, res, next) => {
+  const { studentId } = req.params;
+  const { student } = req.body;
+  const result = await StudentServices.updateDinleStudentsFromDB(
+    studentId,
+    student,
+  );
+
+  res.status(200).json({
+    success: true,
+    message: 'Student is updated succesfully',
+    data: result,
+  });
+});
 export const StudentControllers = {
   getAllStudents,
   getSingleStudent,
   deleteSingleStudent,
+  updateSingleStudent,
 };
-function fn(
-  req: Request<
-    import('express-serve-static-core').ParamsDictionary,
-    any,
-    any,
-    import('qs').ParsedQs,
-    Record<string, any>
-  >,
-  res: Response<any, Record<string, any>>,
-  next: NextFunction,
-): any {
-  throw new Error('Function not implemented.');
-}
+
+// function fn(
+//   req: Request<
+//     import('express-serve-static-core').ParamsDictionary,
+//     any,
+//     any,
+//     import('qs').ParsedQs,
+//     Record<string, any>
+//   >,
+//   res: Response<any, Record<string, any>>,
+//   next: NextFunction,
+// ): any {
+//   throw new Error('Function not implemented.');
+// }

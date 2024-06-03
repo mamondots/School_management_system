@@ -22,7 +22,7 @@
 
 //--fourt modul end ---
 
-//--five modul start ---
+//--five & six modul start ---
 
 import express from 'express';
 import { userController } from './user.controller';

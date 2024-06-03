@@ -63,7 +63,7 @@
 
 //---fourth model end ---
 
-//--five modul start---
+//--five & six modul start---
 
 import { userService } from './user.service';
 import catchAsync from '../../utilites/catchAsync';

@@ -112,7 +112,7 @@
 
 //---fourth modul end ---
 
-//---five modul start---
+//---five & six modul start---
 
 import { Schema, model } from 'mongoose';
 import { Tuser } from './user.interface';

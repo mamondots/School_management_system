@@ -121,8 +121,9 @@
 
 //---fourth modul end --
 
-//---five modul start---
+//---five & six modul start---
 
+import mongoose from 'mongoose';
 import config from '../../config';
 import { TAcadimicSemester } from '../acadimicSemester/acadimicSemester.interface';
 import { AcadimicSemester } from '../acadimicSemester/acadimicSemester.model';
@@ -168,20 +169,42 @@ const createStudentIntoDB = async (password: string, payLoad: TStudent) => {
     payLoad.admissionSemester,
   );
 
-  userData.id = await generateStudentID(admissionSemester);
+  const session = await mongoose.startSession();
 
-  // create a user
+  try {
+    session.startTransaction();
+    userData.id = await generateStudentID(admissionSemester);
 
-  const newUser = await User.create(userData); //---build in static method---
+    // create a user
 
-  //create a student
+    //transition-1
 
-  if (Object.keys(newUser).length) {
-    payLoad.id = newUser.id; // emedding id
-    payLoad.user = newUser._id; //reference id
+    const newUser = await User.create([userData], { session }); //---build in static method---
 
-    const newStudent = await Student.create(payLoad);
+    //create a student
+
+    if (!newUser.length) {
+      throw new Error('Failed to create user');
+    }
+
+    payLoad.id = newUser[0].id; // emedding id
+    payLoad.user = newUser[0]._id; //reference id
+
+    //transition-2
+
+    const newStudent = await Student.create([payLoad], { session });
+
+    if (!newStudent.length) {
+      throw new Error('Failed to create student');
+    }
+
+    await session.commitTransaction();
+    await session.endSession();
+
     return newStudent;
+  } catch (error) {
+    await session.abortTransaction();
+    await session.endSession();
   }
 };
 
