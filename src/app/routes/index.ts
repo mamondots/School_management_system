@@ -63,6 +63,12 @@ import { AcadimicSemesterRoute } from '../modules/acadimicSemester/acadimicSemes
 import { Router } from 'express';
 import { AcadimicFaclityRouter } from '../modules/acadimicFaclity/acadimicFaclity.route';
 import { AcadimicDepartmentRouter } from '../modules/acadimicDepartment/acadimicDepartment.router';
+import { FacultyRoutes } from '../modules/Faculty/faculty.route';
+import { AdminRoutes } from '../modules/Admin/admin.route';
+import { CourseRoutes } from '../modules/Course/course.route';
+import { semesterRegistrationRoutes } from '../modules/semesterRegistration/semesterRegistration.route';
+import { offeredCourseRoutes } from '../modules/OfferedCourse/OfferedCourse.route';
+import { AuthRoutes } from '../modules/Auth/auth.route';
 
 const router = Router();
 
@@ -76,6 +82,14 @@ const moduleRoutes = [
     route: StudentRoutes,
   },
   {
+    path: '/faculties',
+    route: FacultyRoutes,
+  },
+  {
+    path: '/admins',
+    route: AdminRoutes,
+  },
+  {
     path: '/acadimic-semester',
     route: AcadimicSemesterRoute,
   },
@@ -86,6 +100,23 @@ const moduleRoutes = [
   {
     path: '/acadimic-department',
     route: AcadimicDepartmentRouter,
+  },
+  {
+    path: '/courses',
+    route: CourseRoutes,
+  },
+
+  {
+    path: '/semester-registrations',
+    route: semesterRegistrationRoutes,
+  },
+  {
+    path: '/offered-courses',
+    route: offeredCourseRoutes,
+  },
+  {
+    path: '/auth',
+    route: AuthRoutes,
   },
 ];
 

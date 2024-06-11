@@ -377,7 +377,7 @@ const updateDinleStudentsFromDB = async (
     }
   }
 
-  const result = await Student.findOneAndUpdate({ id }, modifiedUpdatedData, {
+  const result = await Student.findByIdAndUpdate(id, modifiedUpdatedData, {
     new: true,
   });
   return result;
